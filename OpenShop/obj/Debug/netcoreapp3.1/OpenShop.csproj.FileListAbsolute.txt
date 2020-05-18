@@ -1,0 +1,13 @@
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.exe
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.deps.json
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.runtimeconfig.json
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.runtimeconfig.dev.json
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.dll
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\bin\Debug\netcoreapp3.1\OpenShop.pdb
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.csprojAssemblyReference.cache
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.AssemblyInfoInputs.cache
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.AssemblyInfo.cs
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.dll
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.pdb
+C:\Users\Usuario\Documents\UTN\TERCER AÑO\DSI\OpenShop\obj\Debug\netcoreapp3.1\OpenShop.genruntimeconfig.cache
