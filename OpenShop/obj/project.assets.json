@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\OpenShop\\OpenShop.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\git\\DSI-2020-VilosioSofia\\OpenShop\\OpenShop.csproj",
       "projectName": "OpenShop",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\OpenShop\\OpenShop.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\git\\DSI-2020-VilosioSofia\\OpenShop\\OpenShop.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\OpenShop\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Documents\\UTN\\TERCER AÑO\\DSI\\git\\DSI-2020-VilosioSofia\\OpenShop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",

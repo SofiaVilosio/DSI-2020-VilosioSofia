@@ -3,41 +3,79 @@ using System.Collections.Generic;
 
 namespace OpenShop
 {
-   
     class GestorVenta
     {
         static Carrito Carrito = new Carrito();
+        static List<Venta> ventas = new List<Venta>();
 
         static void Main(string[] args)
         {
-            while (true)
-            {
-               MostrarProductos();
-
-               var resultado = AgregarAlCarrito();
-               if (!resultado)
-               {
-                   break;
-               }
-                System.Console.WriteLine("Seleccione 1 si desea seguir agregando productos al carrito o 2 si quiere pagar");
-                var decision = System.Console.ReadLine();
-                while (decision != "1" && decision !="2")
+        while (true)
+         {
+            System.Console.WriteLine("¿Que desea hacer?\n 1-Vender \n 2-Preparar pedido");
+            var eleccion = System.Console.ReadLine();
+            while (eleccion != "1" && eleccion !="2")
                 {
-                    System.Console.WriteLine("Seleccione 1 si desea seguir agregando productos al carrito o 2 si quiere pagar");
-                    decision = System.Console.ReadLine();
-                }
-                
-                if (decision == "2")
+                    System.Console.WriteLine("¿Que desea hacer?\n 1-Vender \n 2-Preparar pedido");
+                    eleccion = System.Console.ReadLine();
+                }   
+                if (eleccion == "1")
                 {
-                    break;
-                }
-            }
+                    while (true)
+                    {
+                        MostrarProductos();
 
-            decimal total= Carrito.precioTotalCarrito();
-            var Venta= new Venta(total);
-            Venta.metodoDePago();
+                        var resultado = AgregarAlCarrito();
+                        if (!resultado)
+                        {
+                            break;
+                        }
+                        System.Console.WriteLine("¿Que desea hacer?\n 1-Seguir agregando productos al carrito \n 2-Pagar");
+                        var decision = System.Console.ReadLine();
+                        while (decision != "1" && decision !="2")
+                        {
+                            System.Console.WriteLine("¿Que desea hacer?\n 1-Seguir agregando productos al carrito \n 2-Pagar");
+                            decision = System.Console.ReadLine();
+                        }
+                        
+                        if (decision == "2")
+                        {
+                            break;
+                        }   
+                    }
 
-            System.Console.WriteLine("Gracias por comprar");
+                    decimal total= Carrito.precioTotalCarrito();
+                    var Venta= new Venta(total, Carrito.Productos);
+                    Venta.metodoDePago();
+                    Carrito.VaciarCarrito();
+                    ventas.Add(Venta);
+
+                    System.Console.WriteLine("Gracias por comprar"); 
+                }   
+                else 
+                {
+                    Console.Clear();
+                    bool PedidosSinPreparar = false;
+                    foreach(var venta in ventas)
+                    {
+                        if(venta.Preparado==false)
+                        {
+                            PedidosSinPreparar=true;
+                            venta.MostrarPreparacionDeLaVenta();
+                            venta.Preparado=true; 
+                        }   
+                    }
+                    if(PedidosSinPreparar==false)
+                    {
+                        System.Console.WriteLine("No hay pedidos sin preparar");
+                    }  
+                    else 
+                    {
+                        System.Console.WriteLine("Se prepararon todos los pedidos");
+                    }                 
+                }  
+         }
+            
         }
 
        static void MostrarProductos()
@@ -119,7 +157,7 @@ namespace OpenShop
 
     class Carrito
     {
-        private List<ItemProducto> Productos = new List<ItemProducto>();
+        public List<ItemProducto> Productos = new List<ItemProducto>();
 
         public void Agregar(ItemProducto itemProducto)
         {
@@ -159,34 +197,56 @@ namespace OpenShop
             }
             return total;
         }
+
+        public void VaciarCarrito()
+        {
+            Productos = new List<ItemProducto>();
+        }
     }
 
     class Venta
     {
         public decimal Precio{get;set;}
-        public Venta(decimal precio)
+        public List<ItemProducto> Productos {get;set;}
+        public bool Preparado{get;set;}
+        public int FormaDePago{get;set;}
+
+        public Venta(decimal precio, List<ItemProducto> productos)
         {
            Precio = precio;
+           Productos = productos;
+           Preparado = false; 
         }
+
         public void metodoDePago()
         {
-             System.Console.WriteLine("Seleccione 1 si desea pagar con debito o 2 con tarjeta de credito (6 cuotas)");
+            System.Console.WriteLine("¿Que desea hacer?\n 1-Pagar con Debito \n 2-Pagar con tarjeta de credito (6 cuotas)");
             var decision2 = System.Console.ReadLine();
             while (decision2 != "1" && decision2 !="2")
                 {
-                    System.Console.WriteLine("Seleccione 1 si desea pagar con debito o 2 con tarjeta de credito (6 cuotas)");
+                    System.Console.WriteLine("¿Que desea hacer?\n 1-Pagar con Debito \n 2-Pagar con tarjeta de credito (6 cuotas)");
                     decision2 = System.Console.ReadLine();
                 }
             var total = Precio;
             if(decision2=="1")
             {
                 System.Console.WriteLine($"Se le debitaron ${total}  de tu tarjeta");
+                FormaDePago=1;
             }
              if(decision2=="2")
             {
                 decimal totalcuota;
                 totalcuota= total/6;
                 System.Console.WriteLine($"Su pago se efectuará en 6 cuotas de {totalcuota} a parti del proximo mes");
+                FormaDePago=2;
+            }
+        }
+
+        public void MostrarPreparacionDeLaVenta()
+        {
+            foreach(var item in Productos)
+            {
+                System.Console.WriteLine($"Preparando {item.Cantidad} {item.Producto.Nombre}");
             }
         }
     }
