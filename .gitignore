@@ -358,8 +358,3 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-OpenShop/bin/Debug/netcoreapp3.1/OpenShop.dll
-OpenShop/bin/Debug/netcoreapp3.1/OpenShop.pdb
-OpenShop/obj/Debug/netcoreapp3.1/OpenShop.assets.cache
-OpenShop/obj/Debug/netcoreapp3.1/OpenShop.dll
-OpenShop/obj/Debug/netcoreapp3.1/OpenShop.pdb
