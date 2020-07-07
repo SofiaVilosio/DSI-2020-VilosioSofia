@@ -15,99 +15,39 @@ namespace TP3
                 var decision = Console.ReadLine();
                 while (decision != "1" && decision != "2" && decision != "3" && decision != "4" && decision != "5")
                 {
-                    Console.WriteLine($"¿Que desea hacer?: \n 1- Inscribirte a un cruso \n 2- Registrar una persona \n 3- Agregar un curso nuevo \n 4-Agregar docente a curso \n 5- Salir");
+                    Console.WriteLine($"¿Que desea hacer?: \n 1- Inscribirte a un curso \n 2- Registrar una persona \n 3- Agregar un curso nuevo \n 4-Agregar docente a curso \n 5- Salir");
                     decision = System.Console.ReadLine();
                 }
-
+                //salir
                 if (decision == "5")
                 {
                     break;
                 }
-
+                //Inscribirse a un curso
                 if (decision == "1")
-                {
-                    //Elegir persona que quiere inscribirse
-                    Console.WriteLine("La persona que quiere inscribirse es: \n 1-Alumno \n 2-Docente \n 3- Público general");
-                    var decisionInscripcion = Console.ReadLine();
-                    while (decisionInscripcion != "1" && decisionInscripcion != "2" && decisionInscripcion != "3")
+                {   
+                    Persona personaInscripta;
+                    //MOSTRAR PUBLICO
+                    if (RegistroPersona.personas.Count() > 0)
                     {
-                        Console.WriteLine("La persona que quiere inscribirse es: \n 1-Alumno \n 2-Docente \n 3- Público generla");
-                        decisionInscripcion = Console.ReadLine();
-                    }
-                    Persona personaInscripta = null;
-                    if (decisionInscripcion == "1")
-                    {
-
-                        if (RegistroAlumno.alumnos.Count() > 0)
+                        Console.WriteLine("Seleccione la persona que quiere inscribir:");
+                        MostrarPersonas();
+                        string personaElegido = Console.ReadLine();
+                        int opcionpersonaElegido;
+                        while (int.TryParse(personaElegido, out opcionpersonaElegido) == false)
                         {
-                            //Mostrar alumnos
-                            Console.WriteLine("Seleccione al alumno que quiere inscribir:");
-                            MostrarAlumnos();
-                            string alumnoElegido = Console.ReadLine();
-                            int opcionalumnoElegido;
-                            while (int.TryParse(alumnoElegido, out opcionalumnoElegido) == false)
-                            {
-                                Console.WriteLine("Marque una opción válida");
-                            }
-                            personaInscripta = RegistroAlumno.alumnos.ElementAt(opcionalumnoElegido - 1);
-                            //FIN 
-
+                            Console.WriteLine("Marque una opción válida");
                         }
-                        else
-                        //NO HAY ALUMNOS...
-                        {
-                            RegistrarAlumno();
-                            personaInscripta = RegistroAlumno.alumnos.ElementAt(0);
-                        }
+                        personaInscripta = RegistroPersona.personas.ElementAt(opcionpersonaElegido - 1);
                         //FIN
                     }
-                    if (decisionInscripcion == "2")
+                    else
+                    //REGISTRAR PUBLICO
                     {
-
-                        if (RegistroDocente.docentes.Count() > 0)
-                        {
-                            //MOSTRAR DOCENTES
-                            Console.WriteLine("Seleccione al docente que quiere inscribir:");
-                            MostrarDocentes();
-                            string docenteElegido = Console.ReadLine();
-                            int opciondocenteElegido;
-                            while (int.TryParse(docenteElegido, out opciondocenteElegido) == false)
-                            {
-                                Console.WriteLine("Marque una opción válida");
-                            }
-                            personaInscripta = RegistroDocente.docentes.ElementAt(opciondocenteElegido - 1);
-                            //FIN
-                        }
-                        else
-                        //NO HAY DOCENTE...
-                        {
-                            RegistrarDocente();
-                            personaInscripta = RegistroDocente.docentes.ElementAt(0);
-                        }
+                        RegistrarPersona();
+                        personaInscripta = RegistroPersona.personas.ElementAt(0);
                     }
-                    if (decisionInscripcion == "3")
-                    {
-                        //MOSTRAR PUBLICO
-                        if (RegistroPersona.personas.Count() > 0)
-                        {
-                            Console.WriteLine("Seleccione la persona que quiere inscribir:");
-                            MostrarPersonas();
-                            string personaElegido = Console.ReadLine();
-                            int opcionpersonaElegido;
-                            while (int.TryParse(personaElegido, out opcionpersonaElegido) == false)
-                            {
-                                Console.WriteLine("Marque una opción válida");
-                            }
-                            personaInscripta = RegistroPersona.personas.ElementAt(opcionpersonaElegido - 1);
-                            //FIN
-                        }
-                        else
-                        //REGISTRAR PUBLICO
-                        {
-                            RegistrarPublico();
-                            personaInscripta = RegistroPersona.personas.ElementAt(0);
-                        }
-                    }
+                
                     //FIN 
 
                     //ELEGIR CURSO
@@ -132,33 +72,12 @@ namespace TP3
                         Console.WriteLine("No hay cupos para inscribirse");
                     }
                 }
-
+                //Registrar persona
                 if (decision == "2")
                 {
-                    Console.WriteLine("Seleccione la condición de la persona: \n 1-Alumno \n 2-Docente \n 3- Público generla");
-                    var decisionRegistro = Console.ReadLine();
-                    while (decisionRegistro != "1" && decisionRegistro != "2" && decisionRegistro != "3")
-                    {
-                        Console.WriteLine("Seleccione la condición de la persona: \n 1-Alumno \n 2-Docente \n 3- Público generla");
-                        decisionRegistro = Console.ReadLine();
-                    }
-                    //REGISTRO ALUMNO
-                    if (decisionRegistro == "1")
-                    {
-                        RegistrarAlumno();
-                    }
-                    //REGISTRO DOCENTE
-                    if (decisionRegistro == "2")
-                    {
-                        RegistrarDocente();
-                    }
-                    //REGISTRO PUBLICO GENERAL
-                    if (decisionRegistro == "3")
-                    {
-                        RegistrarPublico();
-                    }
-
+                     RegistrarPersona();
                 }
+                //Crear curso
                 if (decision == "3")
                 {
 
@@ -169,17 +88,18 @@ namespace TP3
                     Console.WriteLine("¿Para quien está dirigido?");
                     string descripcion = Console.ReadLine();
                     Console.WriteLine("Ingrese el día, mes y hora de comienzo del curso (Ej: 01/03/2020 19:30)");
-                    string formato = "dd/MM/yyyy";
+                    string formato = "g";
+                    var provider = new CultureInfo("fr-FR");
                     List<DateTime> FechasDictado = new List<DateTime>();
                     DateTime fecha;
                     string fechaIngresada = Console.ReadLine();
                     bool cargarFechas = false;
                     do
                     {
-                        while(DateTime.TryParseExact(fechaIngresada, formato, null,
-                        DateTimeStyles.None, out fecha)==false)
+                        while(DateTime.TryParseExact(fechaIngresada, formato, provider,
+                                                    DateTimeStyles.None, out fecha)==false)
                         {
-                            Console.WriteLine("Ingrese el día, mes y hora de comienzo del curso (Ej: 01/03/2020)");
+                            Console.WriteLine("Ingrese el día, mes de la siguiente clase (Ej: 01/03/2020)");
                             fechaIngresada = Console.ReadLine();
                         }
                         FechasDictado.Add(fecha);
@@ -196,39 +116,41 @@ namespace TP3
                         if (opcionMasFechas == 1)
                         {
                             cargarFechas = true;
+                            fechaIngresada = "";
                         }
                         else
                         {
                             cargarFechas = false;
                         }
-                    }while(cargarFechas == true);
+                    }while(cargarFechas != false);
                     
-                    List<Docente> docentesDelCurso = new List<Docente>();
-                    Docente docente;
+                    List<Persona> docentesDelCurso = new List<Persona>();
+                    Persona docente;
                     bool cargarDocentes = true;
                     while (cargarDocentes == true)
                     {
                         //DOCENTE                        
-                        if (RegistroDocente.docentes.Count() > 0)
+                        if (RegistroPersona.personas.Count() > 0)
                         {
                             //MOSTRAR DOCENTES
-                            Console.WriteLine("Seleccione al docente que quiere inscribir:");
-                            MostrarDocentes();
+                            Console.WriteLine("Seleccione la persona que será docente del curso:");
+                            MostrarPersonas();
                             string docenteElegido = Console.ReadLine();
                             int opciondocenteElegido;
                             while (int.TryParse(docenteElegido, out opciondocenteElegido) == false)
                             {
                                 Console.WriteLine("Marque una opción válida");
                             }
-                            docente = RegistroDocente.docentes.ElementAt(opciondocenteElegido - 1);
+                            docente = RegistroPersona.personas.ElementAt(opciondocenteElegido - 1);
                             docentesDelCurso.Add(docente);
                             //FIN
                         }
                         else
                         //NO HAY DOCENTE...
                         {
-                            RegistrarDocente();
-                            docente = RegistroDocente.docentes.ElementAt(0);
+                            Console.WriteLine("Carga los datos del docente del curso");
+                            RegistrarPersona();
+                            docente = RegistroPersona.personas.ElementAt(0);
                             docentesDelCurso.Add(docente);
                         }
                         Console.WriteLine("¿Quiere ingresar mas docentes? \n 1-Si \n 2-No");
@@ -283,65 +205,50 @@ namespace TP3
                     Curso curso = new Curso(nombre, descripcion, FechasDictado, docentesDelCurso, cupoMax, cupoMin, fechaLimite);
                     RegistroCurso.Cursos.Add(curso);
                 }
-            }
-        }
-        public static void RegistrarAlumno()
-        {
-            Console.WriteLine("¿Nombre y Apellido?");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("¿DNI?");
-            var dniElegido = Console.ReadLine();
-            int dni;
-            while (int.TryParse(dniElegido, out dni) == false)
-            {
-                Console.WriteLine("Ingrese un numero");
-            }
-            Console.WriteLine("¿Legajo?");
-            var legajoElegido = Console.ReadLine();
-            int legajo;
-            while (int.TryParse(legajoElegido, out legajo) == false)
-            {
-                Console.WriteLine("Ingrese un numero");
-            }
-            Console.WriteLine("¿Carrera?");
-            string carrera = Console.ReadLine();
-            Console.WriteLine("Numero de telefono:");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("¿Cual es su email?");
-            string email = Console.ReadLine();
+                //Agregar docente suplente
+                if (decision== "4")
+                {
+                    //CURSO
+                    Console.WriteLine("A que curso le quiere agregar el docente?");
+                    MostrarCursos();
+                    string cursoElegido = Console.ReadLine();
+                    int opcionCursoElegido;
+                    while (int.TryParse(cursoElegido, out opcionCursoElegido) == false)
+                    {
+                        Console.WriteLine("Marque una opción válida");
+                    }
+                    var curso = RegistroCurso.Cursos.ElementAt(opcionCursoElegido - 1);
 
-            Alumno alumno = new Alumno(nombre, dni, legajo, carrera, telefono, email);
-            RegistroAlumno.alumnos.Add(alumno);
-        }
-        public static void RegistrarDocente()
-        {
-            Console.WriteLine("¿Nombre y Apellido?");
-            string nombre = Console.ReadLine();
-            Console.WriteLine("¿DNI?");
-            var dniElegido = Console.ReadLine();
-            int dni;
-            while (int.TryParse(dniElegido, out dni) == false)
-            {
-                Console.WriteLine("Ingrese un numero");
-            }
-            Console.WriteLine("¿Legajo Docente?");
-            var legajoElegido = Console.ReadLine();
-            int legajo;
-            while (int.TryParse(legajoElegido, out legajo) == false)
-            {
-                Console.WriteLine("Ingrese un numero");
-            }
-            Console.WriteLine("¿Título?");
-            string titulo = Console.ReadLine();
-            Console.WriteLine("Numero de telefono:");
-            string telefono = Console.ReadLine();
-            Console.WriteLine("¿Cual es su email?");
-            string email = Console.ReadLine();
+                    //PERSONA DOCENTE
+                    Persona docenteSuplente;
+                    //MOSTRAR PUBLICO
+                    if (RegistroPersona.personas.Count() > 0)
+                    {
+                        Console.WriteLine("Seleccione la persona que quiere inscribir:");
+                        MostrarPersonas();
+                        string personaElegido = Console.ReadLine();
+                        int opcionpersonaElegido;
+                        while (int.TryParse(personaElegido, out opcionpersonaElegido) == false)
+                        {
+                            Console.WriteLine("Marque una opción válida");
+                        }
+                        docenteSuplente = RegistroPersona.personas.ElementAt(opcionpersonaElegido - 1);
+                        //FIN
+                    }
+                    else
+                    //REGISTRAR PUBLICO
+                    {
+                        RegistrarPersona();
+                        docenteSuplente = RegistroPersona.personas.ElementAt(0);
+                    }
 
-            Docente docente = new Docente(nombre, dni, legajo, titulo, telefono, email);
-            RegistroDocente.docentes.Add(docente);
+                    curso.ActualizarDocente(docenteSuplente);
+                    Console.WriteLine("El docente suplente se agregó correctamente");
+                }
+            }
         }
-        public static void RegistrarPublico()
+        
+        public static void RegistrarPersona()
         {
             Console.WriteLine("¿Nombre y Apellido?");
             string nombre = Console.ReadLine();
@@ -361,26 +268,6 @@ namespace TP3
             RegistroPersona.personas.Add(persona);
         }
 
-        static void MostrarAlumnos()
-        {
-            int id = 1;
-            foreach (var alumno in RegistroAlumno.alumnos)
-            {
-                System.Console.WriteLine($"{id}- Nombre: {alumno.Nombre}, legajo {alumno.Legajo}");
-                id = id + 1;
-            }
-        }
-
-        static void MostrarDocentes()
-        {
-            int id = 1;
-            foreach (var docente in RegistroDocente.docentes)
-            {
-                System.Console.WriteLine($"{id}- Nombre: {docente.Nombre}, legajo {docente.Legajo}");
-                id = id + 1;
-            }
-        }
-
         static void MostrarPersonas()
         {
             int id = 1;
@@ -396,7 +283,18 @@ namespace TP3
             int id = 1;
             foreach (var curso in RegistroCurso.Cursos)
             {
-                System.Console.WriteLine($"{id}- Nombre: {curso.Nombre}, Descripción {curso.Descripcion}, Fechas de dictado: {curso.FechasDictado}, Fecha limite de inscripción {curso.FechaLimite} Dictado por: {curso.Docentes}");
+                System.Console.WriteLine($"{id}- Curso: {curso.Nombre} , \n \t Dirigido a: {curso.Descripcion}, " +
+                    $" \n \t Fecha limite de inscripción: {curso.FechaLimite}");
+                Console.WriteLine("\n \t Docentes del curso:");
+                foreach (Persona item in curso.Docentes)
+                {
+                    Console.WriteLine($"\t \t \t {item.Nombre}");
+                }
+                Console.WriteLine("\n \t Fechas de cursado:");
+                foreach (DateTime item in curso.FechasDictado)
+                {
+                    Console.WriteLine(item.ToString("\t \t \t dd/MM/yyyy hh:mm"));
+                }
                 id = id + 1;
             }
         }
@@ -407,99 +305,64 @@ namespace TP3
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public List<DateTime> FechasDictado { get; set; }
-        public List<Docente> Docentes { get; set; }
+        public List<Persona> Docentes { get; set; }
         public int CupoMax { get; set; }
         public int CupoMin { get; set; }
         public DateTime FechaLimite { get; set; }
 
-        public Curso(string nombre, string descripcion, List<DateTime> fechasDictado, List<Docente> docentes, int cupoMax, int cupoMin, DateTime fechaLimite)
+        public Curso(string nombre, string descripcion, List<DateTime> fechasDictado, List<Persona> docentes, int cupoMax, int cupoMin, DateTime fechaLimite)
         {
             Nombre = nombre;
             Descripcion = descripcion;
-            fechasDictado = FechasDictado;
+            FechasDictado = fechasDictado;
             Docentes = docentes;
             CupoMax = cupoMax;
             CupoMin = cupoMin;
             FechaLimite = fechaLimite;
         }
+
+        public void ActualizarDocente( Persona docente)
+        {
+            Docentes.Add(docente);
+        }
     }
 
-    public class RegistroCurso
+    public static class RegistroCurso
     {
         public static List<Curso> Cursos = new List<Curso>();
 
         static RegistroCurso()
         {
             List<DateTime> fechasDictado = new List<DateTime>();
-            List<Docente> docentes = new List<Docente>();
+            List<Persona> docentes = new List<Persona>();
             fechasDictado.Add(new DateTime(2020, 03, 20, 19, 00, 00));
             fechasDictado.Add(new DateTime(2020, 03, 27, 19, 00, 00));
             fechasDictado.Add(new DateTime(2020, 004, 04, 19, 00, 00));
-            docentes.Add(new Docente("JP Ferreyra", 20256965, 45854, "Ing. En Sistemas de Información", "3564585654", "jpferreyra@gmail.com"));
+            docentes.Add(new Persona("JP Ferreyra", 20256965, "3564585654", "jpferreyra@gmail.com"));
             DateTime fechaLimite1 = new DateTime(2020, 03, 15);
             Cursos.Add(new Curso("Excel Basico", "Todo Publico", fechasDictado, docentes, 10, 30, fechaLimite1));
-            fechasDictado.Clear();
-            docentes.Clear();
 
-            fechasDictado.Add(new DateTime(2020, 04, 10, 20, 30, 00));
-            fechasDictado.Add(new DateTime(2020, 03, 17, 20, 30, 00));
-            fechasDictado.Add(new DateTime(2020, 04, 24, 20, 30, 00));
-            fechasDictado.Add(new DateTime(2020, 11, 24, 20, 30, 00));
-            docentes.Add(new Docente("Pedro Perez", 14589658, 45869, "Ing. Electromecánico", "3564574585", "pedroperez@gmail.com"));
+
+            List<DateTime> fechasDictado2 = new List<DateTime>();
+            List<Persona> docentes2 = new List<Persona>();
+            fechasDictado2.Add(new DateTime(2020, 04, 10, 20, 30, 00));
+            fechasDictado2.Add(new DateTime(2020, 03, 17, 20, 30, 00));
+            fechasDictado2.Add(new DateTime(2020, 04, 24, 20, 30, 00));
+            fechasDictado2.Add(new DateTime(2020, 11, 24, 20, 30, 00));
+            docentes2.Add(new Persona("Pedro Perez", 14589658, "3564574585", "pedroperez@gmail.com"));
             DateTime fechaLimite2 = new DateTime(2020, 04, 05);
-            Cursos.Add(new Curso("Electricidad industrial", "Todo Publico", fechasDictado, docentes, 5, 15, fechaLimite2));
-            fechasDictado.Clear();
-            docentes.Clear();
+            Cursos.Add(new Curso("Electricidad industrial", "Todo Publico", fechasDictado2, docentes2, 5, 15, fechaLimite2));
 
-            fechasDictado.Add(new DateTime(2020, 07, 01, 19, 30, 00));
-            fechasDictado.Add(new DateTime(2020, 07, 07, 19, 30, 00));
-            fechasDictado.Add(new DateTime(2020, 07, 14, 19, 30, 00));
-            docentes.Add(new Docente("Laura Alvarez", 28569856, 41256, "Contadora", "3564857545", "lauraalvarez@gmail.com"));
+            List<DateTime> fechasDictado3 = new List<DateTime>();
+            List<Persona> docentes3 = new List<Persona>();
+            fechasDictado3.Add(new DateTime(2020, 07, 01, 19, 30, 00));
+            fechasDictado3.Add(new DateTime(2020, 07, 07, 19, 30, 00));
+            fechasDictado3.Add(new DateTime(2020, 07, 14, 19, 30, 00));
+            docentes3.Add(new Persona("Laura Alvarez", 28569856, "3564857545", "lauraalvarez@gmail.com"));
             DateTime fechaLimite3 = new DateTime(2020, 04, 05);
-            Cursos.Add(new Curso("Asistente Administrativo", "Todo Publico", fechasDictado, docentes, 15, 40, fechaLimite3));
-            fechasDictado.Clear();
-            docentes.Clear();
+            Cursos.Add(new Curso("Asistente Administrativo", "Todo Publico", fechasDictado3, docentes3, 15, 40, fechaLimite3));
+            
         }
-    }
-
-    public class Docente : Persona
-    {
-        public int Legajo { get; set; }
-        public string Titulo { get; set; }
-
-
-        public Docente(string nombre, int dni, int legajo, string titulo, string telefono, string email) : base(nombre, dni, telefono, email)
-        {
-            Legajo = legajo;
-            Titulo = titulo;
-        }
-
-    }
-
-    public class RegistroDocente
-    {
-        public static List<Docente> docentes = new List<Docente>();
-    }
-
-    public class Alumno : Persona
-    {
-
-        public int Legajo { get; set; }
-        public string Carrera { get; set; }
-
-
-
-        public Alumno(string nombre, int dni, int legajo, string carrera, string telefono, string email) : base(nombre, dni, telefono, email)
-        {
-            Legajo = legajo;
-            Carrera = carrera;
-        }
-
-    }
-
-    class RegistroAlumno
-    {
-        public static List<Alumno> alumnos = new List<Alumno>();
     }
 
     public class Persona
