@@ -268,7 +268,7 @@ namespace TP3
             RegistroPersona.personas.Add(persona);
         }
 
-        static void MostrarPersonas()
+        public static void MostrarPersonas()
         {
             int id = 1;
             foreach (var persona in RegistroPersona.personas)
@@ -278,7 +278,7 @@ namespace TP3
             }
         }
 
-        static void MostrarCursos()
+        public static void MostrarCursos()
         {
             int id = 1;
             foreach (var curso in RegistroCurso.Cursos)
