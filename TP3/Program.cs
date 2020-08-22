@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using Newtonsoft.Json;
+using System.CodeDom.Compiler;
 
 namespace TP3
 {
@@ -66,6 +68,8 @@ namespace TP3
                         Inscripcion inscripcion = new Inscripcion(curso, personaInscripta);
                         inscripcion.MostrarInscripcion();
                         RegistroInscripcion.Inscripciones.Add(inscripcion);
+                        var inscripcionEnArchivoJson = JsonConvert.SerializeObject(RegistroInscripcion.Inscripciones, Formatting.Indented);
+                        System.IO.File.WriteAllText("inscripciones.Json", inscripcionEnArchivoJson);
                     }
                     else
                     {
@@ -87,6 +91,7 @@ namespace TP3
                     //DESCRIPCION
                     Console.WriteLine("¿Para quien está dirigido?");
                     string descripcion = Console.ReadLine();
+                    //Fecha del curso 
                     Console.WriteLine("Ingrese el día, mes y hora de comienzo del curso (Ej: 01/03/2020 19:30)");
                     string formato = "g";
                     var provider = new CultureInfo("fr-FR");
@@ -204,6 +209,8 @@ namespace TP3
                         }
                     Curso curso = new Curso(nombre, descripcion, FechasDictado, docentesDelCurso, cupoMax, cupoMin, fechaLimite);
                     RegistroCurso.Cursos.Add(curso);
+                    var cursoEnArchivoJson = JsonConvert.SerializeObject(RegistroCurso.Cursos, Formatting.Indented);
+                    System.IO.File.WriteAllText("Cursos.Json", cursoEnArchivoJson);
                 }
                 //Agregar docente suplente
                 if (decision== "4")
@@ -266,6 +273,8 @@ namespace TP3
 
             Persona persona = new Persona(nombre, dni, telefono, email);
             RegistroPersona.personas.Add(persona);
+            var personaEnArchivoJson = JsonConvert.SerializeObject(RegistroPersona.personas, Formatting.Indented);
+            System.IO.File.WriteAllText("personas.Json", personaEnArchivoJson);
         }
 
         public static void MostrarPersonas()
@@ -324,6 +333,8 @@ namespace TP3
         public void ActualizarDocente( Persona docente)
         {
             Docentes.Add(docente);
+            var docenteEnArchivoJson = JsonConvert.SerializeObject(docente, Formatting.Indented);
+            System.IO.File.WriteAllText("Docente.Json", docenteEnArchivoJson);
         }
     }
 
@@ -333,35 +344,48 @@ namespace TP3
 
         static RegistroCurso()
         {
-            List<DateTime> fechasDictado = new List<DateTime>();
-            List<Persona> docentes = new List<Persona>();
-            fechasDictado.Add(new DateTime(2020, 03, 20, 19, 00, 00));
-            fechasDictado.Add(new DateTime(2020, 03, 27, 19, 00, 00));
-            fechasDictado.Add(new DateTime(2020, 004, 04, 19, 00, 00));
-            docentes.Add(new Persona("JP Ferreyra", 20256965, "3564585654", "jpferreyra@gmail.com"));
-            DateTime fechaLimite1 = new DateTime(2020, 03, 15);
-            Cursos.Add(new Curso("Excel Basico", "Todo Publico", fechasDictado, docentes, 10, 30, fechaLimite1));
+            if (System.IO.File.Exists("cursos.json"))
+            {
+                string contenidoArchivoCursos = System.IO.File.ReadAllText("cursos.json");
+                List<Curso> cursosEnArchivoJson = JsonConvert.DeserializeObject<List<Curso>>(contenidoArchivoCursos);
+                if (cursosEnArchivoJson.Count != 0)
+                {
+                    Cursos = cursosEnArchivoJson;
+                }
+            }            
+            else
+            {
+                List<DateTime> fechasDictado = new List<DateTime>();
+                List<Persona> docentes = new List<Persona>();
+                fechasDictado.Add(new DateTime(2020, 03, 20, 19, 00, 00));
+                fechasDictado.Add(new DateTime(2020, 03, 27, 19, 00, 00));
+                fechasDictado.Add(new DateTime(2020, 004, 04, 19, 00, 00));
+                docentes.Add(new Persona("JP Ferreyra", 20256965, "3564585654", "jpferreyra@gmail.com"));
+                DateTime fechaLimite1 = new DateTime(2020, 03, 15);
+                Cursos.Add(new Curso("Excel Basico", "Todo Publico", fechasDictado, docentes, 10, 30, fechaLimite1));
 
+                List<DateTime> fechasDictado2 = new List<DateTime>();
+                List<Persona> docentes2 = new List<Persona>();
+                fechasDictado2.Add(new DateTime(2020, 04, 10, 20, 30, 00));
+                fechasDictado2.Add(new DateTime(2020, 03, 17, 20, 30, 00));
+                fechasDictado2.Add(new DateTime(2020, 04, 24, 20, 30, 00));
+                fechasDictado2.Add(new DateTime(2020, 11, 24, 20, 30, 00));
+                docentes2.Add(new Persona("Pedro Perez", 14589658, "3564574585", "pedroperez@gmail.com"));
+                DateTime fechaLimite2 = new DateTime(2020, 04, 05);
+                Cursos.Add(new Curso("Electricidad industrial", "Todo Publico", fechasDictado2, docentes2, 5, 15, fechaLimite2));
 
-            List<DateTime> fechasDictado2 = new List<DateTime>();
-            List<Persona> docentes2 = new List<Persona>();
-            fechasDictado2.Add(new DateTime(2020, 04, 10, 20, 30, 00));
-            fechasDictado2.Add(new DateTime(2020, 03, 17, 20, 30, 00));
-            fechasDictado2.Add(new DateTime(2020, 04, 24, 20, 30, 00));
-            fechasDictado2.Add(new DateTime(2020, 11, 24, 20, 30, 00));
-            docentes2.Add(new Persona("Pedro Perez", 14589658, "3564574585", "pedroperez@gmail.com"));
-            DateTime fechaLimite2 = new DateTime(2020, 04, 05);
-            Cursos.Add(new Curso("Electricidad industrial", "Todo Publico", fechasDictado2, docentes2, 5, 15, fechaLimite2));
-
-            List<DateTime> fechasDictado3 = new List<DateTime>();
-            List<Persona> docentes3 = new List<Persona>();
-            fechasDictado3.Add(new DateTime(2020, 07, 01, 19, 30, 00));
-            fechasDictado3.Add(new DateTime(2020, 07, 07, 19, 30, 00));
-            fechasDictado3.Add(new DateTime(2020, 07, 14, 19, 30, 00));
-            docentes3.Add(new Persona("Laura Alvarez", 28569856, "3564857545", "lauraalvarez@gmail.com"));
-            DateTime fechaLimite3 = new DateTime(2020, 04, 05);
-            Cursos.Add(new Curso("Asistente Administrativo", "Todo Publico", fechasDictado3, docentes3, 15, 40, fechaLimite3));
-            
+                List<DateTime> fechasDictado3 = new List<DateTime>();
+                List<Persona> docentes3 = new List<Persona>();
+                fechasDictado3.Add(new DateTime(2020, 07, 01, 19, 30, 00));
+                fechasDictado3.Add(new DateTime(2020, 07, 07, 19, 30, 00));
+                fechasDictado3.Add(new DateTime(2020, 07, 14, 19, 30, 00));
+                docentes3.Add(new Persona("Laura Alvarez", 28569856, "3564857545", "lauraalvarez@gmail.com"));
+                DateTime fechaLimite3 = new DateTime(2020, 04, 05);
+                Cursos.Add(new Curso("Asistente Administrativo", "Todo Publico", fechasDictado3, docentes3, 15, 40, fechaLimite3));
+                
+                var cursoEnArchivoJson = JsonConvert.SerializeObject(Cursos, Formatting.Indented);
+                System.IO.File.WriteAllText("Cursos.Json", cursoEnArchivoJson);
+            }            
         }
     }
 
@@ -386,7 +410,21 @@ namespace TP3
     public class RegistroPersona
     {
         public static List<Persona> personas = new List<Persona>();
+        static RegistroPersona()
+        {
+            if (System.IO.File.Exists("personas.json"))
+            {
+                string contenidoArchivoPeronas = System.IO.File.ReadAllText("personas.json");
+                List<Persona> personasEnArchivoJson = JsonConvert.DeserializeObject<List<Persona>>(contenidoArchivoPeronas);
+                if (personasEnArchivoJson.Count != 0)
+                {
+                    personas = personasEnArchivoJson;
+                }
+            }
+        }
+
     }
+
 
     public class Inscripcion
     {
@@ -409,6 +447,18 @@ namespace TP3
     static class RegistroInscripcion
     {
         public static List<Inscripcion> Inscripciones = new List<Inscripcion>();
+        static RegistroInscripcion()
+        {
+            if (System.IO.File.Exists("inscripciones.json"))
+            {
+                string contenidoArchivoInscripciones = System.IO.File.ReadAllText("inscripciones.json");
+                List<Inscripcion> inscripcionesEnArchivoJson = JsonConvert.DeserializeObject<List<Inscripcion>>(contenidoArchivoInscripciones);
+                if (inscripcionesEnArchivoJson.Count != 0)
+                {
+                    Inscripciones = inscripcionesEnArchivoJson;
+                }
+            }
+        }
     }
 }
 
