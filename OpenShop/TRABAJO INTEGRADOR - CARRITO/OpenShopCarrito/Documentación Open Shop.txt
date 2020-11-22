@@ -1,0 +1,31 @@
+﻿•Trabajo Final: Open Shop.
+•Cátedra: Diseño de Sistemas.
+•UTN FR San Francisco.
+•Docentes: Pioli Pablo, Ferreyra Juan Pablo.
+•Alumna: Vilosio Sofia Belén. Legajo: 14500.
+•Fecha: 22/11/2020.
+
+→El trabajo consiste en realizar un software E-commerce, al que llamamos "OpenShop". El software fue divido en cuatro partes:
+	○Catalogo
+	○Carrito
+	○Cobranzas
+	○Despacho
+	Cada parte, le pertecene a un grupo. En mi caso, me tocó Carrito.
+
+→Objetivos del Trabajo: 
+• Realizar todas las etapas de desarrollo de software
+	○Analisis.
+	○Diseño.
+	○Desarrollo.
+	○Prueba o verificación de prueba.
+	○Documenatación.
+•Aplicar contenidos vistos en el año.
+•Acercarnos a la realidad de la realización de un proyecto de software.
+
+→Los objetivos fueron cumplidos mediante:
+	○Analisis: Realización de diagrama de clases y de secuencia, analisis y captura de requerimientos.
+	○Diseño: Realización de prototipo.
+	○Desarrollo: programación del software en windows form, lenguaje en c#.
+	○Prueba o verificación de prueba: Comprobar que el software realice correctamente las actividades mediante test unitarios y de aprobación.
+	○Documenatación: Archivos en carpeta "Documentación", dentro de la carpeta Trabajo Integrador. 
+
